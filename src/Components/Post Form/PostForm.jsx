@@ -30,8 +30,8 @@ export default function PostForm({ post }) {
     const navigate = useNavigate();
     const [imageUrl, setImageUrl] = useState(null);
 
-    const submit = async (e, data) => {
-        e.preventDefault();
+    const submit = async (data) => {
+
         try {
             if (post) {
                 const file = data.image[0] ? await services.UploadFile(data.image[0]) : null;
@@ -137,7 +137,7 @@ export default function PostForm({ post }) {
                 />
                 <RTE label="Content :" name="content" control={control} defaultValue={getValues("content")} />
             </div>
-            <div className="w-1/3 px-2 z-30 border-2 border-yellow-400">
+            <div className="w-1/3 px-2 z-30">
 
                 <Input
                     label="Featured Image :"

@@ -22,8 +22,19 @@ function AllPosts() {
       }
     }
 
-    FetchUsersPost();
-  }, [])
+      FetchUsersPost();
+
+  }, [posts])
+
+  if (posts.length === 0) {
+    return (
+      <div className='p-24 w-full z-30'>
+        <h1 className='text-5xl font-bold text-green-400'>
+          Navigate to Add Posts !!
+        </h1>
+      </div>
+    );
+  }
 
   return (
     <div className='w-full py-8'>
@@ -37,7 +48,7 @@ function AllPosts() {
         </div>
       </Container>
     </div>
-  )
+  );
 }
 
-export default AllPosts
+export default AllPosts;

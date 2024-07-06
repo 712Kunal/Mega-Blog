@@ -2,20 +2,24 @@ import React, { useEffect, useState } from 'react'
 import services from "../appwrite/config"
 import { Container } from '../Components/Index'
 import { useSelector } from 'react-redux'
+import {PostCard} from '../Components/Index'
 
 function Home() {
     const [posts, setPosts] = useState()
     const authStatus = useSelector(state => state.Auth.status);
+    const authid = useSelector(state => state.Auth.UserData)
 
     useEffect(() => {
-        services.GetPosts().then((post) => {
-            if (post) {
-                setPosts(post.documents)
-            }
-        })
+        if (authStatus) {
+            services.GetPosts(authid.$id).then((post) => {
+                if (post) {
+                    setPosts(post.documents)
+                }
+            })    
+        }
     }, [])
 
-    if (!posts || posts.length === 0) {
+    if (!posts || posts.length === 0 || authStatus) {
         return (
             <div className='w-full py-8 mt-4 text-center'>
                 <Container>
